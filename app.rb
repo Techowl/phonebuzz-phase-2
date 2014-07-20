@@ -16,7 +16,8 @@ helpers do
     signature = env['HTTP_X_TWILIO_SIGNATURE']
     puts '***token***'
     puts ENV['AUTH_TOKEN']
-    data = uri + params.sort.join
+    # data = uri + params.sort.join
+    data = uri
     puts '***data***'
     puts data
     digest = OpenSSL::Digest.new('sha1')
