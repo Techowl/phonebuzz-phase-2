@@ -2,7 +2,6 @@ require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
 # require 'dotenv'  # uncomment this line to run locally
-$stdout.sync = true
 
 # Dotenv.load   # uncomment this line to run locally
 
@@ -20,8 +19,10 @@ helpers do
   end
 end
 
-before '/hello/*' do
-  invalid_call unless request_valid?
+['/hello', '/hello/*'].each do |path|
+  before path do
+    invalid_call unless request_valid?
+  end
 end
 
 get '/hello' do
