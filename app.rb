@@ -14,8 +14,7 @@ helpers do
     signature = env['HTTP_X_TWILIO_SIGNATURE']
     puts '***token***'
     puts ENV['AUTH_TOKEN']
-    puts '***env***'
-    puts env
+    puts validator.validate uri, params, signature
     return validator.validate uri, params, signature
   end
 
@@ -29,6 +28,7 @@ helpers do
 end
 
 before do
+  puts '***checking for validity***'
   hangup_if_invalid
 end
 
