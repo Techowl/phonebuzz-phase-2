@@ -12,42 +12,30 @@ helpers do
   def request_valid?
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
-    # params = env['rack.request.query_hash']
     params = {} # We're using a GET request, so this needs to be empty.
     signature = env['HTTP_X_TWILIO_SIGNATURE']
-    # puts '***token***'
-    # puts ENV['AUTH_TOKEN']
-    # # data = uri + params.sort.join
-    # data = uri
-    # puts '***data***'
-    # puts data
-    # digest = OpenSSL::Digest.new('sha1')
-    # puts '***digest***'
-    # puts digest
-    # encoded = Base64.encode64(OpenSSL::HMAC.digest(digest, ENV['AUTH_TOKEN'], data)).strip
-    # puts '***encoded***'
-    # puts encoded
-    # puts '***signature***'
-    # puts signature
-    # puts '***result***'
-    # puts signature == encoded
-    # return signature == encoded
-
-    puts validator.validate uri, params, signature
     return validator.validate uri, params, signature
   end
 end
 
+error 403 do
+  'Access forbidden'
+end
+
+before do
+  return 403 unless request_valid?
+end
+
 get '/hello' do
   Twilio::TwiML::Response.new do |r|
-    unless request_valid?
-      r.Say 'Invalid request.'
-      r.Hangup
-    else
+    # unless request_valid?
+    #   r.Say 'Invalid request.'
+    #   r.Hangup
+    # else
       r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
         g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
       end
-    end
+    # end
   end.text
 end
 
@@ -55,9 +43,10 @@ get '/hello/fizzbuzz' do
   number = params['Digits'].to_i
   redirect '/hello' unless (number >= 1 && number <= 999)
   Twilio::TwiML::Response.new do |r|
-    unless request_valid?
-      r.Say 'Invalid request.'
-    else
+    # unless request_valid?
+    #   r.Say 'Invalid request.'
+    #   r.Hangup
+    # else
       number.times do |i|
         curr_num = i + 1
         if curr_num % 15 == 0
@@ -70,6 +59,6 @@ get '/hello/fizzbuzz' do
           r.Say "#{curr_num}"
         end
       end
-    end
+    # end
   end.text
 end
