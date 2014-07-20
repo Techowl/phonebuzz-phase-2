@@ -10,8 +10,8 @@ helpers do
   def request_valid?
     puts '****env********'
     puts env
-    puts '***request***'
-    puts request
+    puts '***request.url***'
+    puts request.url
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     puts '***past validator***'
     uri = request.url
