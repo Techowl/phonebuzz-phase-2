@@ -7,6 +7,7 @@ require 'sinatra'
 
 helpers do
   def request_valid?
+    puts 'logging'
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
     params = env['rack.request.query_hash']
