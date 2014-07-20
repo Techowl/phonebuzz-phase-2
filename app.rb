@@ -9,13 +9,19 @@ $stdout.sync = true
 helpers do
   def request_valid?
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
-    puts '***past validator***'
     uri = request.url
-    puts '***past uri***'
-    # params = env['rack.request.query_hash']
-    # puts '***past params***'
+    params = env['rack.request.query_hash']
     signature = env['HTTP_X_TWILIO_SIGNATURE']
-    puts '***past signature***'
+    puts '***validator***'
+    puts Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN']).inspect
+    puts '***uri***'
+    puts uri
+    puts '***params***'
+    puts params
+    puts '***signature***'
+    puts signature
+    puts '***attempt validation***'
+    puts validator.validate uri, params, signature
     return validator.validate uri, params, signature
   end
 end
