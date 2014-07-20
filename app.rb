@@ -1,9 +1,9 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
-require 'dotenv'
+# require 'dotenv'
 
-Dotenv.load
+# Dotenv.load
 
 # helpers do
 #   def request_valid?
