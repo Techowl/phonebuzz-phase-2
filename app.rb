@@ -24,7 +24,7 @@ helpers do
       Twilio::TwiML::Response.new do |r|
         r.Say 'Invalid request'
       end.text
-    else
+    end
   end
 end
 
