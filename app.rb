@@ -20,6 +20,7 @@ helpers do
 
   def hangup_if_invalid
     if !request_valid?
+      puts '***request not valid***'
       Twilio::TwiML::Response.new do |r|
         r.Say 'Invalid request'
       end.text
