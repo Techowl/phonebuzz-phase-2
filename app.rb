@@ -12,6 +12,8 @@ helpers do
     uri = request.url
     params = env['rack.request.query_hash']
     signature = env['HTTP_X_TWILIO_SIGNATURE']
+    puts '***url***'
+    puts uri
     puts '***token***'
     puts ENV['AUTH_TOKEN']
     puts '***env***'
