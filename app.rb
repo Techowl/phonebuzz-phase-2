@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
-# require 'dotenv'
+# require 'dotenv'  # uncomment this line to run locally
 $stdout.sync = true
 
-# Dotenv.load
+# Dotenv.load   # uncomment this line to run locally
 
 helpers do
   def request_valid?
@@ -14,41 +14,33 @@ helpers do
     signature = env['HTTP_X_TWILIO_SIGNATURE']
     puts '***token***'
     puts ENV['AUTH_TOKEN']
-    puts '***validator***'
-    puts Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN']).inspect
-    puts '***uri***'
-    puts uri
-    puts '***params***'
-    puts params
-    puts '***signature***'
-    puts signature
-    puts '***attempt validation***'
-    puts validator.validate uri, params, signature
+    puts '***env***'
+    puts env
     return validator.validate uri, params, signature
+  end
+
+  def hangup_if_invalid
+    if !request_valid?
+      Twilio::TwiML::Response.new do |r|
+        r.Say 'Invalid request'
+      end.text
+    else
   end
 end
 
-error 403 do
-  'Access forbidden'
+before do
+  hangup_if_invalid
 end
 
 get '/hello' do
-  # return 403 unless request_valid?
-  if !request_valid?
-    Twilio::TwiML::Response.new do |r|
-      r.Say 'Invalid request'
-    end.text
-  else
-    Twilio::TwiML::Response.new do |r|
-      r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
-        g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
-      end
-    end.text
-  end
+  Twilio::TwiML::Response.new do |r|
+    r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
+      g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
+    end
+  end.text
 end
 
 get '/hello/fizzbuzz' do
-  return 403 unless request_valid?
   number = params['Digits'].to_i
   redirect '/hello' unless (number >= 1 && number <= 999)
   Twilio::TwiML::Response.new do |r|
