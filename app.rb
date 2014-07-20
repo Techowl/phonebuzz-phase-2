@@ -10,7 +10,7 @@ $stdout.sync = true
 
 helpers do
   def request_valid?
-    # validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
+    validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
     # params = env['rack.request.query_hash']
     params = {}
