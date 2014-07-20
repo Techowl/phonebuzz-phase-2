@@ -2,6 +2,7 @@ require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
 # require 'dotenv'
+$stdout.sync = true
 
 # Dotenv.load
 
