@@ -23,7 +23,13 @@ error 403 do
 end
 
 before do
-  return 403 unless request_valid?
+  unless request_valid?
+    Twilio::TwiML::Response.new do |r|
+      r.Say 'Access forbidden.'
+      r.Hangup
+    end.text
+    return 403
+  end
 end
 
 get '/hello' do
