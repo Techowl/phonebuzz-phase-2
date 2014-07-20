@@ -20,7 +20,7 @@ helpers do
   end
 end
 
-before do
+before '/hello/*' do
   invalid_call unless request_valid?
 end
 
