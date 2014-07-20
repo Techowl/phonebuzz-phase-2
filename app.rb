@@ -13,7 +13,7 @@ helpers do
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
     # params = env['rack.request.query_hash']
-    params = {}
+    params = {} # We're using a GET request, so this needs to be empty.
     signature = env['HTTP_X_TWILIO_SIGNATURE']
     # puts '***token***'
     # puts ENV['AUTH_TOKEN']
@@ -42,6 +42,7 @@ get '/hello' do
   Twilio::TwiML::Response.new do |r|
     unless request_valid?
       r.Say 'Invalid request.'
+      r.Hangup
     else
       r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
         g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
