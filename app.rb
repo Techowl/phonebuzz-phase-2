@@ -31,12 +31,18 @@ error 403 do
 end
 
 get '/hello' do
-  return 403 unless request_valid?
-  Twilio::TwiML::Response.new do |r|
-    r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
-      g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
-    end
-  end.text
+  # return 403 unless request_valid?
+  if !request_valid?
+    Twilio::TwiML::Response.new do |r|
+      r.Say 'Invalid request'
+    end.text
+  else
+    Twilio::TwiML::Response.new do |r|
+      r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
+        g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
+      end
+    end.text
+  end
 end
 
 get '/hello/fizzbuzz' do
