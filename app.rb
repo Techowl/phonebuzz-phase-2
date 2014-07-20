@@ -16,17 +16,18 @@ helpers do
     signature = env['HTTP_X_TWILIO_SIGNATURE']
     return validator.validate uri, params, signature
   end
+
+  def end_invalid_call
+    r.Say 'Invalid request.'
+    r.Hangup
+  end
 end
 
 get '/hello' do
   Twilio::TwiML::Response.new do |r|
-    unless request_valid?
-      r.Say 'Invalid request.'
-      r.Hangup
-    else
-      r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
-        g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
-      end
+    end_invalid_call unless request_valid?
+    r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
+      g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
     end
   end.text
 end
