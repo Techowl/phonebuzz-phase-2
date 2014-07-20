@@ -5,18 +5,18 @@ require 'sinatra'
 
 # Dotenv.load
 
-# helpers do
-#   def request_valid?
-#     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
-#     uri = request.url
-#     params = env['rack.request.query_hash']
-#     signature = env['HTTP_X_TWILIO_SIGNATURE']
-#     return validator.validate uri, params, signature
-#   end
-# end
+helpers do
+  def request_valid?
+    validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
+    uri = request.url
+    params = env['rack.request.query_hash']
+    signature = env['HTTP_X_TWILIO_SIGNATURE']
+    return validator.validate uri, params, signature
+  end
+end
 
 get '/hello' do
-  # return unless request_valid?
+  return unless request_valid?
   Twilio::TwiML::Response.new do |r|
     r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
       g.Say 'Hello! To receive your FizzBuzz results, please enter a number between 1 and 999 followed by the pound sign.'
@@ -25,7 +25,7 @@ get '/hello' do
 end
 
 get '/hello/fizzbuzz' do
-  # return unless request_valid?
+  return unless request_valid?
   number = params['Digits'].to_i
   redirect '/hello' unless (number >= 1 && number <= 999)
   Twilio::TwiML::Response.new do |r|
