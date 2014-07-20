@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
+require 'openssl'
+require 'base64'
 # require 'dotenv'  # uncomment this line to run locally
 $stdout.sync = true
 
@@ -8,19 +10,29 @@ $stdout.sync = true
 
 helpers do
   def request_valid?
-    validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
+    # validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
     params = env['rack.request.query_hash']
     signature = env['HTTP_X_TWILIO_SIGNATURE']
-    puts '***url***'
-    puts uri
     puts '***token***'
     puts ENV['AUTH_TOKEN']
-    puts '***env***'
-    puts env
+    data = url + params.sort.join
+    puts '***data***'
+    puts data
+    digest = OpenSSL::Digest.new('sha1')
+    puts '***digest***'
+    puts digest
+    encoded = Base64.encode64(OpenSSL::HMAC.digest(digest, ENV['AUTH_TOKEN'], data)).strip
+    puts '***encoded***'
+    puts encoded
+    puts '***signature***'
+    puts signature
     puts '***result***'
-    puts validator.validate uri, params, signature
-    return validator.validate uri, params, signature
+    puts signature == encoded
+    return signature == encoded
+
+    # puts validator.validate uri, params, signature
+    # return validator.validate uri, params, signature
   end
 end
 
