@@ -26,7 +26,7 @@ end
 end
 
 get '/' do
-  html :index
+  erb :index
 end
 
 get '/hello' do
