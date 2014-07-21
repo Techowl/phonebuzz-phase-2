@@ -1,17 +1,17 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
-# require 'dotenv'  # uncomment this line to run locally
+require 'dotenv'  # uncomment this line to run locally
 
 $stdout.sync = true # for debugging
-# Dotenv.load   # uncomment this line to run locally
+Dotenv.load   # uncomment this line to run locally
 
 helpers do
   def request_valid?
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
     params = {} # We're using a GET request, so this needs to be empty.
-    signature = ENV['HTTP_X_TWILIO_SIGNATURE']
+    signature = env['HTTP_X_TWILIO_SIGNATURE']
     return validator.validate uri, params, signature
   end
 

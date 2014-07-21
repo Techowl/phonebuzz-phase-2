@@ -17,7 +17,7 @@ Open the .env file, and give it two lines of text, like so:
 ACCOUNT_SID=YOUR_ACCOUNT_SID_HERE
 AUTH_TOKEN=YOUR_AUTH_TOKEN_HERE
 ```
-You will also need to uncomment a couple of specially-marked lines of code near the top of app.rb. Finally, be sure to put your own Twilio phone number into the :from parameter in the /call route of app.rb, and to update the URL in that same route to match the way you're running the app (e.g., :url => 'localhost:4567/hello').
+You will also need to uncomment a couple of specially-marked lines of code near the top of app.rb. Finally, be sure to put your own Twilio phone number into the :from parameter in the /call route of app.rb.
 
 Now you're ready to download any dependencies you don't have and run the program.
 ```
