@@ -125,7 +125,6 @@ a:hover, a:active {
 @media (max-width: 600px) {
 .container {
     padding: 20px 0 45px 0;
-    height: 220px;
   }
 
   .call-to-action {
