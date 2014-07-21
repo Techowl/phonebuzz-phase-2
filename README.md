@@ -25,4 +25,4 @@ bundle
 ruby app.rb
 ```
 
-Of course, you can also just observe the app where I have it hosted on Heroku: phonebuzz2.herokuapp.com. I've also spent a brief while at the end making the site responsive -- I haven't been able to test it on any Android devices, but I can confirm that the Heroku site works well on an iPHone.
+Of course, you can also just observe the app where I have it hosted on Heroku: phonebuzz2.herokuapp.com. I've spent a brief while at the end making the site responsive -- I haven't been able to test it on any Android devices, but I can confirm that the Heroku site works well on an iPhone.
