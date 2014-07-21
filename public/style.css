@@ -20,7 +20,7 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .call-to-action {
@@ -123,7 +123,7 @@ a:hover, a:active {
 }
 
 @media (max-width: 600px) {
-.container {
+  .container {
     padding: 20px 0 45px 0;
   }
 
@@ -156,7 +156,9 @@ a:hover, a:active {
   }
 
   .attribution {
-    opacity: 0.75;
+    opacity: 0.28;
+    position: static;
+    margin-top: 260px;
   }
 
   .phone-num-form input[type=submit]:hover {
@@ -165,5 +167,13 @@ a:hover, a:active {
 
   a:hover {
     border-bottom: 1px solid transparent;
+  }
+}
+
+@media (max-width: 400px) {
+  .attribution {
+    opacity: 0.75;
+    position: absolute;
+    margin-top: 0;
   }
 }
