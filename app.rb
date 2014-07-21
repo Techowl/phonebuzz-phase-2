@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
-# require 'dotenv' # uncomment to run locally
+require 'dotenv'
 
 # $stdout.sync = true # for debugging
-# Dotenv.load # uncomment to run locally
+Dotenv.load
 
 helpers do
   def request_valid?
