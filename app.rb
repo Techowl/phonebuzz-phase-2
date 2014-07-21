@@ -62,7 +62,9 @@ post '/call' do
   call = client.account.calls.create(
     :from => '+13373264355',
     :to => params['numToCall'],
-    :url => 'http://phonebuzz2.herokuapp.com/hello'
+    :url => 'http://phonebuzz2.herokuapp.com/hello',
+    :timeout => '20',
+    :method => 'get'
   )
 end
 
