@@ -177,4 +177,9 @@ a:hover, a:active {
     position: absolute;
     margin-top: 0;
   }
+
+  .container {
+    padding: 20px 0 45px 0;
+    margin: auto;
+  }
 }
