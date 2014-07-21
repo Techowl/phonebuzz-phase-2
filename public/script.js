@@ -1,19 +1,75 @@
 $(document).ready(function() {
-  $('.phone-num-form input[type="submit"]').click(form.handleSubmit);
+  form.init();
 });
 
 form = {
-  handleSubmit: function(e) {
-    e.preventDefault();
-    $('.message-to-user').addClass('validating');
-    $('.message-to-user').text('Validating...');
-    form.validateInput(e);
+  messageToUser: null,
+  phoneInput: null,
+
+  init: function() {
+    this.messageToUser = $('.message-to-user');
+    this.phoneInput = $('.phone-num-form input[type="tel"]');
+    $('.phone-num-form input[type="submit"]').click(form.handleSubmit);
   },
 
-  validateInput: function(e) {
-    // validate
-    // if valid, submit and change text/class to 'submitted'
-    // else clear field and tell user to try again, changing text/class
+  handleSubmit: function(e) {
+    e.preventDefault();
+    form.showActivelyValidating();
+    var input = form.phoneInput.val();
+    form.validate(input);
+  },
+
+  showActivelyValidating: function() {
+    form.messageToUser.removeClass('invalid');
+    form.messageToUser.removeClass('valid');
+    form.messageToUser.addClass('validating');
+    form.messageToUser.text('Validating...');
+  },
+
+  validate: function(input) {
+    var numbers = this.getNumbersFromInput(input);
+    var numString = numbers.join('');
+    if (numString.length == 10) {
+      form.isValid(numString);
+    } else {
+      form.isInvalid();
+    }
+  },
+
+  getNumbersFromInput: function(input) {
+    var numbers = $.map(input.split(''), function(n) {
+      n = (parseInt(n, 10));
+      if (isNaN(n)) {
+        return '';
+      } else {
+        return n + ''; // convert back to string
+      }
+    });
+    return numbers;
+  },
+
+  isValid: function(numString) {
+    this.removeInputText();
+    this.messageToUser.removeClass('validating');
+    this.messageToUser.addClass('valid');
+    this.messageToUser.text('Thanks! You\'ll receive a phone call shortly.');
+    this.submitNumber(parseInt(numString, 10));
+  },
+
+  isInvalid: function() {
+    this.removeInputText();
+    this.messageToUser.removeClass('validating');
+    this.messageToUser.addClass('invalid');
+    this.messageToUser.text('Sorry, that wasn\'t valid. Please enter a ten-digit phone number.');
+  },
+
+  removeInputText: function() {
+    this.phoneInput.val('');
+  },
+
+  submitNumber: function(number) {
+    console.log(number)
+    // make AJAX call
   }
 };
 
