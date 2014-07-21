@@ -5,6 +5,8 @@ $(document).ready(function() {
 form = {
   messageToUser: null,
   phoneInput: null,
+  twilioAccountNum: 'AC9493d6fa9f0617ca80fea8f92caac281',
+  callFromNum: '+13373264355',
 
   init: function() {
     this.messageToUser = $('.message-to-user');
@@ -53,7 +55,7 @@ form = {
     this.messageToUser.removeClass('validating');
     this.messageToUser.addClass('valid');
     this.messageToUser.text('Thanks! You\'ll receive a phone call shortly.');
-    this.submitNumber(parseInt(numString, 10));
+    this.submitNumber('+1' + numString);
   },
 
   isInvalid: function() {
@@ -68,13 +70,22 @@ form = {
   },
 
   submitNumber: function(number) {
-    console.log(number)
-    // make AJAX call
+    $.ajax({
+      type: "POST",
+      url: "/2008-08-01/Accounts/" + form.twilioAccountNum + "/Calls",
+      data: {
+        To: number,
+        From: form.callFromNum,
+        Url: '/hello',
+        Timeout: '20'
+      }
+    })
+    .fail(form.alertUserOfAJAXFail);
+  },
+
+  alertUserOfAJAXFail: function() {
+    form.messageToUser.removeClass('valid');
+    form.messageToUser.addClass('invalid');
+    form.messageToUser.text('Oops! Your number was valid, but we couldn\'t set up your call. Please try again later.')
   }
 };
-
-      // <input type="tel" name="Called" placeholder="e.g. (337) 326-4355">
-      // <input type="hidden" name="Caller" value="+13373264355">
-      // <input type="hidden" name="Url" value="/hello">
-      // <input type="timeout" name="Timeout" value="20">
-      // action="/2008-08-01/Accounts/AC9493d6fa9f0617ca80fea8f92caac281/Calls" method="post"

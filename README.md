@@ -16,10 +16,12 @@ Open the .env file, and give it a single line of text, like so:
 ```
 AUTH_TOKEN:YOUR_AUTH_TOKEN_HERE
 ```
-You will also need to uncomment a couple of specially-marked lines of code near the top of app.rb.
+You will also need to uncomment a couple of specially-marked lines of code near the top of app.rb. Finally, be sure to put your own account SID (form.twilioAccountNum) and Twilio phone number (form.callFromNum) into public/script.js.
 
 Now you're ready to download any dependencies you don't have and run the program.
 ```
 bundle
 ruby app.rb
 ```
+
+Of course, you can also just observe the app where I have it hosted on Heroku: phonebuzz2.herokuapp.com.
