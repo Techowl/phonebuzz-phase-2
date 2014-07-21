@@ -25,6 +25,10 @@ end
   end
 end
 
+get '/' do
+  html :index
+end
+
 get '/hello' do
   Twilio::TwiML::Response.new do |r|
     r.Gather :finishOnKey => '#', :action => '/hello/fizzbuzz', :method => 'get' do |g|
