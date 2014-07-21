@@ -65,7 +65,7 @@ body {
   -o-transition: background 0.12s linear;
 }
 
-.phone-num-form input[type=submit]:hover {
+.phone-num-form input[type=submit]:hover, .phone-num-form input[type=submit]:active {
   background: #D46D20;
 }
 
@@ -157,5 +157,13 @@ a:hover, a:active {
 
   .attribution {
     opacity: 0.7;
+  }
+
+  .phone-num-form input[type=submit]:hover {
+    background: white;
+  }
+
+  a:hover {
+    border-bottom: 1px solid transparent;
   }
 }
