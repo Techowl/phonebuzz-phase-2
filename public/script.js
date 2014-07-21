@@ -1,3 +1,3 @@
 $(document).ready(function() {
-  alert('hi');
+  // validate field, show error or success text and 'validating' text
 });
