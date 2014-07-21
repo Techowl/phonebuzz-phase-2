@@ -156,8 +156,8 @@ a:hover, a:active {
   }
 
   .attribution {
-    opacity: 0.75;
-    bottom: 7px;
+    opacity: 0.7;
+    bottom: 10px;
   }
 
   .phone-num-form input[type=submit]:hover {
