@@ -1,0 +1,98 @@
+html {
+  background: url(images/large-phone.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 0 50px 0;
+  width: 100%;
+  height: 220px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.call-to-action {
+  font-family: 'Lato', sans-serif;
+  position: relative;
+  bottom: 10px;
+}
+
+.instructions {
+  position: relative;
+  bottom: 10px;
+}
+
+.phone-num-form input {
+  border: 4px #D46D20 solid;
+  font-size: 17px;
+}
+
+.phone-num-form input[type=tel] {
+  color: black;
+  background: url('images/phone.png') white no-repeat 2% 50%;
+  background-size: auto 80%;
+  height: 46px;
+  width: 280px;
+  border-radius: 32px;
+  padding: 0 0 0 54px;
+  margin-right: 5px;
+}
+
+.phone-num-form input[type=submit] {
+  background: white;
+  color: black;
+  height: 52px;
+  width: 90px;
+  border-radius: 20px;
+  position: relative;
+  top: -1px;
+  transition: background 0.12s linear;
+  -webkit-transition: background 0.12s linear;
+  -moz-transition: background 0.12s linear;
+  -ms-transition: background 0.12s linear;
+  -o-transition: background 0.12s linear;
+}
+
+.phone-num-form input[type=submit]:hover {
+  background: #D46D20;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid transparent;
+  transition: border 0.12s linear;
+  -webkit-transition: border 0.12s linear;
+  -moz-transition: border 0.12s linear;
+  -ms-transition: border 0.12s linear;
+  -o-transition: border 0.12s linear;
+}
+
+a:hover, a:active {
+  border-bottom: 1px solid white;
+}
+
+.questions-comments a {
+  position: relative;
+  top: 10px;
+}
+
+.attribution {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
+  opacity: 0.22;
+}
