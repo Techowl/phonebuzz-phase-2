@@ -157,7 +157,7 @@ a:hover, a:active {
 
   .attribution {
     opacity: 0.75;
-    position: absolute;
+    bottom: 7px;
   }
 
   .phone-num-form input[type=submit]:hover {
