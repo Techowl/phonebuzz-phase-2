@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'twilio-ruby'
 require 'sinatra'
-# require 'dotenv'  # uncomment this line to run locally
+require 'dotenv'  # uncomment this line to run locally
 
-# Dotenv.load   # uncomment this line to run locally
+$stdout.sync = true # for debugging
+Dotenv.load   # uncomment this line to run locally
 
 helpers do
   def request_valid?
@@ -61,7 +62,7 @@ post '/call' do
   call = client.account.calls.create(
     :from => '+13373264355',
     :to => params['numToCall'],
-    :url => '/hello'
+    :url => 'localhost:4567/hello'
   )
 end
 
