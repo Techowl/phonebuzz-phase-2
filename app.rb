@@ -10,7 +10,7 @@ helpers do
     validator = Twilio::Util::RequestValidator.new(ENV['AUTH_TOKEN'])
     uri = request.url
     params = {} # We're using a GET request, so this needs to be empty.
-    signature = env['HTTP_X_TWILIO_SIGNATURE']
+    signature = ENV['HTTP_X_TWILIO_SIGNATURE']
     return validator.validate uri, params, signature
   end
 
@@ -54,6 +54,15 @@ get '/hello/fizzbuzz' do
       end
     end
   end.text
+end
+
+get '/call' do
+  client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
+  call = client.account.calls.create(
+    :from => '+13373264355',
+    :to => params['numToCall'],
+    :url => '/hello'
+  )
 end
 
 get '/invalid' do

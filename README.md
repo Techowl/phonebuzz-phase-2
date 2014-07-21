@@ -12,11 +12,12 @@ However, you will first need to set up a .env file that contains your Twilio aut
 ```
 touch .env
 ```
-Open the .env file, and give it a single line of text, like so:
+Open the .env file, and give it two lines of text, like so:
 ```
+ACCOUNT_SID:YOUR_ACCOUNT_SID_HERE
 AUTH_TOKEN:YOUR_AUTH_TOKEN_HERE
 ```
-You will also need to uncomment a couple of specially-marked lines of code near the top of app.rb. Finally, be sure to put your own account SID (form.twilioAccountNum) and Twilio phone number (form.callFromNum) into public/script.js.
+You will also need to uncomment a couple of specially-marked lines of code near the top of app.rb. Finally, be sure to put your own Twilio phone number into the :from parameter in the /call route of app.rb.
 
 Now you're ready to download any dependencies you don't have and run the program.
 ```

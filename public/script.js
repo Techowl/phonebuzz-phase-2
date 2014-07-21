@@ -6,7 +6,6 @@ form = {
   messageToUser: null,
   phoneInput: null,
   twilioAccountNum: 'AC9493d6fa9f0617ca80fea8f92caac281',
-  callFromNum: '+13373264355',
 
   init: function() {
     this.messageToUser = $('.message-to-user');
@@ -72,12 +71,9 @@ form = {
   submitNumber: function(number) {
     $.ajax({
       type: "POST",
-      url: "https://api.twilio.com/2010-04-01/Accounts/" + form.twilioAccountNum + "/Calls",
+      url: "/call",
       data: {
-        To: number,
-        From: form.callFromNum,
-        Url: '/hello',
-        Timeout: '20'
+        numToCall: number
       }
     })
     .fail(form.alertUserOfAJAXFail);
