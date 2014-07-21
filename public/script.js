@@ -72,7 +72,7 @@ form = {
   submitNumber: function(number) {
     $.ajax({
       type: "POST",
-      url: "/2008-08-01/Accounts/" + form.twilioAccountNum + "/Calls",
+      url: "https://api.twilio.com/2010-04-01/Accounts/" + form.twilioAccountNum + "/Calls",
       data: {
         To: number,
         From: form.callFromNum,
