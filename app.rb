@@ -39,7 +39,6 @@ get '/hello' do
 end
 
 get '/hello/fizzbuzz' do
-  redirect '/hello' unless params['Digits']
   number = params['Digits'].to_i
   redirect '/hello' unless (number >= 1 && number <= 999)
   Twilio::TwiML::Response.new do |r|
