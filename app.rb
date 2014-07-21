@@ -56,7 +56,7 @@ get '/hello/fizzbuzz' do
   end.text
 end
 
-get '/call' do
+post '/call' do
   client = Twilio::REST::Client.new ENV['ACCOUNT_SID'], ENV['AUTH_TOKEN']
   call = client.account.calls.create(
     :from => '+13373264355',
